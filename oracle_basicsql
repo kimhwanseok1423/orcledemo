@@ -1,0 +1,206 @@
+SELECT first_name
+FROM employees;
+
+
+
+--stack 
+--dsadadads
+
+
+-- 도구 > 환경설정 >코드 편집기 >글꼴 >크기 조정
+SELECT *FROM employees;
+SELECT*FROM tab;
+
+/*
+컬럼명, 테이블명에 별칭(alias)를 지정할 수 있다.
+별칭(alias)에 공백이 있을때에는 ""(쌍따옴표)를 지정한다.
+*/
+SELECT salary, salary*10 AS bonus   
+FROM employees;
+
+--king님의 급여는 24000입니다.
+SELECT last_name || '님의 급여는'|| salary || '입니다.' AS name
+FROM employees;
+
+--중복된 값 제거하기
+SELECT DISTINCT first_name
+FROM employees;
+
+SELECT DISTINCT first_name,last_name
+FROM employees;
+/*
+SELECT 입력순서
+
+
+SELECT column_name1, column_name2
+FROM table_name
+WHERE column_name='value'
+GROUP BY column_name
+HAVING column_name='value'
+ORDER BY column_name ASC, column_name DESC;
+
+-- SELECT 해석 순서
+
+FROM table_name
+WHERE column_name='value'
+GROUP BY column_name
+HAVING column_name='value'
+SELECT column_name1,column_name2
+ORDER BY column_name ASC,column_name DESC;
+*/
+
+--employees 테이블에서 salary에 3000미만 일때의
+--first name, salary을 출력하라
+SELECT first_name, salary
+FROM employees
+WHERE salary<3000;
+
+--employees 테이블에서 first-name컬럼의 값이 'David' 일때의 
+--first name,salary 출력하라
+SELECT first_name, salary
+From employees
+WHERE first_name='David';
+
+--employees 테이블에서 first-name컬럼의 값이 'David' 아닐때의 
+--first name,salary 출력하라
+SELECT first_name, salary
+From employees
+WHERE first_name !='David';
+
+SELECT first_name, salary
+From employees
+WHERE first_name <>'David';
+
+--employees 테이블에서 salary이 3000,9000,17000일떄
+--first_name,hire_date,salary을 출력하라.
+SELECT first_name,hire_date,salary
+FROM employees
+where salary IN(3000,9000,17000);
+
+
+--employees 테이블에서 salary이 3000~5000까지 일때의
+--first_name,hire_date,salary을 출력하라.
+SELECT first_name,hire_date,salary
+FROM employees
+WHERE salary >=3000 And salary<=5000;
+
+
+SELECT first_name,hire_date,salary
+FROM employees
+WHERE salary BETWEEN 3000 AND 5000;
+
+--employees 테이블에서 job_id가 'IF_PROG'이 아닐때
+--first_name,email,job_id을 출력
+SELECT first_name,email,job_id
+FROM employees
+ WHERE job_id !='IT_PROG';
+ 
+SELECT first_name,email,job_id
+FROM employees
+ WHERE job_id <>'IT_PROG';
+ 
+ SELECT first_name,email,job_id
+FROM employees
+ WHERE job_id ^='IT_PROG';
+ 
+ 
+ SELECT first_name,email,job_id
+FROM employees
+ WHERE NOT (job_id ='IT_PROG');
+ 
+ --employees 테이블에서 salary이 3000,9000,17000이 아닐떄
+--first_name,hire_date,salary을 출력하라.
+
+ SELECT first_name,hire_date,salary
+FROM employees
+Where Not(salary=3000 OR salary=9000 Or salary=17000);
+
+ SELECT first_name,hire_date,salary
+FROM employees
+Where salary NOT IN(3000,9000,17000);
+
+
+--employees 테이블에서 salary이 3000~5000까지 아닐때의
+--first_name,hire_date,salary을 출력하라.
+SELECT first_name,hire_date,salary
+FROM employees
+WHERE NOT(salary >=3000 And salary<=5000);
+
+SELECT first_name,hire_date,salary
+FROM employees
+WHERE salary NOT BETWEEN 3000 AND 5000;
+
+
+
+--employees 테이블에 commission_pct이 null일때
+--first name , salalry,commision_pct을 출력하라
+SELECT first_name,salary,commission_pct
+FROM employees
+WHERE commission_pct IS NULL;
+
+--employees 테이블에 commission_pct이 null이 아닐때
+--first name , salalry,commision_pct을 출력하라
+SELECT first_name,salary,commission_pct
+FROM employees
+WHERE commission_pct IS NOT NULL;
+
+--employees 테이블에서 first name에 'der'이 포함된 
+--first name, salary,emial을 출력하라
+SELECT first_name, salary,email
+FROM employees
+WHERE first_name LIKE '%der%';
+
+--employees 테이블에서 first name의 값중 'A'로 시작하고
+--두번째 문자는 임의 문자이면 'exander'로 끝나는 
+--first name, salary,emial을 출력하라
+SELECT first_name, salary,email
+FROM employees
+WHERE first_name LIKE 'A_exander';
+
+/*
+WHERE 절에서 사용된 연산자 3가지 종류
+1.비교연산자: = >  >= <  <=  != <> ^=
+2.SQL연산자: BETWWEN a AND b ,in,like,is null
+3.논리연산자:and,or,not
+
+
+우선 순위
+1.괄호()
+2.NOT연산자
+3.비교연산자,SQL연산자
+4.AND
+5.OR
+
+
+*/
+--employees테이블에서 job_id을 오름차수능로
+--firstname email job_id을 출력하세요.
+SELECT first_name,email,job_id
+FROM employees
+ORDER BY job_id ASC;
+
+--employees테이블에서 job_id을 오름차수능로
+--firstname email job_id을 출력하세요.
+SELECT first_name,email,job_id
+FROM employees
+ORDER BY job_id
+
+ --employees테이블에서 department_id을 오름차t순하고
+ --first_name을 내림차순으로 
+--firstname email job_id을 출력하세요.
+SELECT department_id,first_name,salary
+from employees
+ORDER BY department_id ASC,first_name DESC;
+
+--employees테이블에서 가장 최근 입사 순
+--사원의 first name salary hire_date
+SELECT first_name,salary,hire_date
+From employees
+order by hire_date DESC;
+
+--employees테이블에서 업무 (job_id)이 "FI_ACCOUNT'인 사원들의
+--급여가 높은순으로 first name job id salary을 출력하시오
+SELECT first_name,job_id,salary
+FROM employees
+WHERE job_id='FI_ACCOUNT'
+ORDER BY salary DESC;
