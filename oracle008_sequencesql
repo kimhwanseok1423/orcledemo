@@ -1,0 +1,44 @@
+SELECT * FROM tab;
+
+CREATE TABLE emp09(
+num number,
+name varchar2(20)
+);
+
+SELECT * FROM user_tables;
+
+CREATE SEQUENCE emp09_num_seq
+START WITH 1
+INCREMENT BY 1 
+NOCACHE
+NOCYCLE;
+
+SELECT *FROM user_sequences;
+
+-- nextval: 다음 시퀀스
+select emp09_num_seq.nextval from dual;
+
+-- currval: 현재 시퀀스 -nextval을 수행한 다음에 사용가능
+select emp09_num_seq.currval from dual;
+
+select *from user_sequences;
+
+insert into emp09(num,name)
+values(emp09_num_seq.nextval,'홍길동');
+
+select * from emp09;
+
+INSERT INTO emp09(num,name)
+values(emp09_num_seq.nextval,'고수');
+
+select * from emp09;
+
+delete from emp09
+where num=3;
+
+select * from emp09;
+
+INSERT INTO emp09(num,name)
+values(emp09_num_seq.nextval,'남문기');
+
+select * from emp09;
